@@ -1216,6 +1216,23 @@ const mapNodeData = {
   },
 };
 
+function isLocationKnown(id) {
+  // Always know your current and visited locations
+  if (state.currentLocation === id) return true;
+  if (state.visitedLocations.includes(id)) return true;
+  // Ironmarket is always known (starting location)
+  if (id === 'ironmarket') return true;
+  // Locations revealed through dialogue or flags
+  if (id === 'theknot' && (hasFlag('met_kael') || hasFlag('heard_eastern_warning'))) return true;
+  if (id === 'sigma' && (hasFlag('met_kael') || hasFlag('voss_deal') || hasFlag('pip_found'))) return true;
+  if (id === 'ashgrove' && (hasFlag('met_kael') || hasFlag('pip_found'))) return true;
+  if (id === 'holloway') return true; // visible from Ironmarket, common knowledge
+  if (id === 'dustwalker' && (hasFlag('voss_deal') || hasFlag('dustwalker_leverage') || hasFlag('enc_dustwalker_patrol_intel'))) return true;
+  if (id === 'arcadia' && (hasFlag('arcadia_signal') || hasFlag('met_warden') || hasFlag('enc_arcadia_warning'))) return true;
+  if (id === 'bunkerpyxis' && (hasFlag('enc_bunkerpyxis_tunnel') || hasFlag('heard_eastern_warning'))) return true;
+  return false;
+}
+
 function selectMapNode(id) {
   const data = mapNodeData[id];
   if (!data) return;
@@ -1223,12 +1240,17 @@ function selectMapNode(id) {
   mapPanelTarget = id;
   mapPassageShown = false;
 
+  const known = isLocationKnown(id);
+
   document.getElementById('mp-name').textContent = data.name;
-  document.getElementById('mp-desc').textContent = data.desc;
+  document.getElementById('mp-desc').textContent = known
+    ? data.desc
+    : 'You haven\u2019t learned anything about this location yet. Talk to people, explore, and gather intel.';
 
   // Threat badges
-  document.getElementById('mp-threat').innerHTML = data.threat
-    .map(t => `<span class="threat-badge ${t.type}">${t.label}</span>`).join('');
+  document.getElementById('mp-threat').innerHTML = known
+    ? data.threat.map(t => `<span class="threat-badge ${t.type}">${t.label}</span>`).join('')
+    : '<span class="threat-badge unknown">Unknown</span>';
 
   // Passage
   const passEl = document.getElementById('mp-passage');
