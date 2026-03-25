@@ -991,6 +991,21 @@ function updateSidebar() {
 
 // ── RENDER SCENE ──
 function renderScene(id) {
+  // ── Dynamic encounter scenes ──
+  if (id.startsWith('_encounter_')) {
+    const encId = parseInt(id.replace('_encounter_', ''), 10);
+    const enc = RANDOM_ENCOUNTERS.find(e => e.id === encId);
+    const dest = state._pendingScene || null;
+    state._pendingScene = null;
+    const nextScene = dest || state.currentScene;
+    scenes[id] = {
+      title: 'Encounter',
+      chapter: '— on the road —',
+      text: [enc.text],
+      choices: [{ label: 'Continue', next: nextScene }]
+    };
+  }
+
   const scene = scenes[id];
   if (!scene) { console.error('Missing scene:', id); return; }
 
@@ -1253,6 +1268,19 @@ function confirmTravel() {
   // Existing poison ticks drain HP over time (moderate+)
   if (state.radPoison >= 2) modStat('hp', -(state.radPoison - 1));
 
+  // ── RANDOM ENCOUNTER (40% chance per travel) ──
+  if (Math.random() < 0.4) {
+    const enc = triggerRandomEncounter();
+    state._pendingScene = data.scene || null;
+    if (enc.notif) showNotif(enc.notif);
+    saveState();
+    updateMapVisuals();
+    closeMapPanel();
+    if (document.getElementById('screen-map').style.display === 'flex') toggleMap();
+    renderScene('_encounter_' + enc.id);
+    return;
+  }
+
   saveState();
   updateMapVisuals();
   closeMapPanel();
@@ -1281,6 +1309,94 @@ function startGame(loadSave) {
   } else {
     renderScene('ironmarket_gate');
   }
+}
+
+// ════════════════════════════════════════════════════
+//  RANDOM ENCOUNTERS
+// ════════════════════════════════════════════════════
+
+const RANDOM_ENCOUNTERS = [
+  // ── PURE FLAVOUR (no mechanical effect) ──
+  { id: 1,  text: `A pack of feral dogs circles your path at a distance, their fur matted grey with ash. Their eyes catch the light — too bright, too many. You count eleven. After a long minute they scatter into the scrub.` },
+  { id: 2,  text: `The wind shifts and for a moment you smell something impossible: fresh-cut grass. Then the ash closes back in and the moment is gone, leaving only the familiar chalk taste in your throat.` },
+  { id: 3,  text: `A child's shoe sits upright in the middle of the road. Clean. You walk around it.` },
+  { id: 4,  text: `You find a pre-Fall highway sign half-buried in drift ash. FRESNO — 14 MILES. Whoever Fresno was, they aren't any of those miles anymore.` },
+  { id: 5,  text: `A rusted cargo drone, long dead, hangs from a powerline by its own tether cord. Its camera housing swivels in the wind, tracking nothing. You keep moving.` },
+  { id: 6,  text: `You pass a shanty shrine: road flares burnt to stumps, a cracked visor, and a faded photograph sealed in plastic. Somebody's altar to somebody. You leave it undisturbed.` },
+  { id: 7,  text: `A caravan heading the other direction. Three mules, two wagons, four hard-looking people who don't make eye contact. One of them is counting rosary beads. None of them speak.` },
+  { id: 8,  text: `You startle a colony of bats roosting in a collapsed overpass. They erupt around you in a shrieking black cloud, smelling of ammonia, then vanish south. Your heart takes a moment to settle.` },
+  { id: 9,  text: `Something large moves inside a collapsed warehouse to your left — you catch a shadow, a dull metallic scrape. Whatever it is, it doesn't come out. Neither do you investigate.` },
+  { id: 10, text: `Ash-drifts have buried a pre-Fall minivan up to its windows. Inside: a family of four, carbonised and perfectly still, still belted in. The radio dial is tuned to an AM station that hasn't broadcast since the Fall.` },
+  { id: 11, text: `A crude flag has been planted in the roadside: yellow cloth, painted with a black hourglass. Wastelander sign language. You scan the horizon and pick up the pace.` },
+  { id: 12, text: `You find a hollow tree stuffed with messages written on flattened tin cans. Most are names and dates. One reads: <em>"The water under the Ridge is clean. Tell everyone."</em>` },
+  { id: 13, text: `A dust-storm rolls in from the east, small and fast. You wrap your face and crouch behind a rusted loader for ten minutes while it scours the road. When it passes, the landscape is subtly different — drifts shifted, landmarks re-arranged.` },
+  { id: 14, text: `You nearly step on a land-tortoise the size of a dinner plate, plodding south with the grim patience of geological time. It hisses once and retracts. You give it the road.` },
+  { id: 15, text: `A gang of kids — nine, maybe eleven years old — appear on a ridge above you. They watch in silence. One of them is holding a hand-cranked radio. After a moment they disappear back over the crest without a word.` },
+  { id: 16, text: `A corpse in scavenger gear is propped against a milepost, meticulously posed with hands folded. Cause of death: unclear. Whoever staged this wanted you to find it.` },
+  { id: 17, text: `You cross a creek that runs the colour of old rust. The stones beneath are perfectly ordinary. You don't drink from it.` },
+  { id: 18, text: `A broadcasting tower — intact — emits a low, rhythmic hum that you feel more than hear. No antenna dish, no wiring visible at its base. It hums all the same.` },
+  { id: 19, text: `Three buzzards are circling a spot off the road. You detour wide. Whatever they've found, it's yours to leave alone.` },
+  { id: 20, text: `You find a stretch of road where someone has painted a mural in orange road-marker paint: a stylised sun rising over Ironmarket's skyline. It's optimistic enough to be unsettling.` },
+  { id: 21, text: `A pre-Fall vending machine stands intact and operational in the middle of nothing. Its screen still cycles through brand logos. Every slot is empty. The coin return jams when you check it.` },
+  { id: 22, text: `The ash thins for half a mile and you walk in something close to sunlight. Real shadow stretches behind you. You'd almost forgotten what that felt like.` },
+  { id: 23, text: `You hear singing — a single voice, high and clear, somewhere behind the treeline. It cuts off sharply when you stop to listen. The road stays empty.` },
+  { id: 24, text: `A military drone, ancient and pockmarked with bullet strikes, sits undisturbed in a culvert. Its markings are painted over. Its payload bay is open and empty. Someone got here first, a long time ago.` },
+  { id: 25, text: `You pass a mile of telephone poles, each one hung with a single boot — always left-footed, always tied together by the laces. Hundreds of them. You count without meaning to and stop at sixty-two.` },
+  { id: 26, text: `A roadside diner, roof intact, door open. Inside: six tables set for service. Plates, cups, cutlery — all ash-grey with dust, all undisturbed. The coffee maker is still plugged in and dark.` },
+  { id: 27, text: `You hear a radio broadcast — three clicks, a burst of static, three clicks — repeating on a frequency your canteen's built-in scanner picks up. No voice. No code you recognise. It follows you for twenty minutes then stops.` },
+  { id: 28, text: `A pair of mutated jackrabbits with vestigial wings sit on a fencepost, watching you pass. Their eyes are fully white. They make no move to flee.` },
+  { id: 29, text: `You find a pre-Fall library card half-buried in the gravel. The name is illegible, the due-date stamp still crisp: MARCH 3, 2031. Three weeks before the Fall. Somebody never returned their books.` },
+  { id: 30, text: `A lone scavenger passes you going the other direction at a dead run. They don't speak, don't slow, don't look at you. Whatever they're running from, you never see it.` },
+
+  // ── STAT EFFECTS (+/-) ──
+  { id: 31, text: `You take a wrong turn through a low-lying ash sink. The particulate count is brutal — throat raw, eyes streaming by the time you claw back to high ground.`, effect: () => modStat('con', -1), notif: 'CON -1 — ash inhalation' },
+  { id: 32, text: `A section of road has collapsed into a drainage channel. You drop in, haul yourself out the other side, and arrive at the far bank scraped and winded.`, effect: () => modStat('hp', -3), notif: 'HP -3 — rough crossing' },
+  { id: 33, text: `You stop to help a stranded traveller right their overturned cart. They can't pay you, but they press two salvaged protein bars into your hand. Your CON thanks you.`, effect: () => modStat('con', 1), notif: 'CON +1 — protein bars' },
+  { id: 34, text: `A nest of ash-scorpions — pale, translucent, unnervingly large — scatters when you disturb a roadside boulder. One gets a sting in before you can clear them.`, effect: () => { modStat('hp', -4); modStat('str', -1); }, notif: 'HP -4, STR -1 — scorpion sting' },
+  { id: 35, text: `You shelter in a burned-out farmhouse and find a cache wedged behind the chimney breast: military-issue water-purification tabs and a sealed packet of jerky. You eat before moving on.`, effect: () => modStat('hp', 5), notif: 'HP +5 — cache food' },
+  { id: 36, text: `Someone's dug a shallow irrigation channel and diverted a spring across the road. The water looks clear. You drink deep and refill your canteen.`, effect: () => { modStat('con', 1); modStat('hp', 2); }, notif: 'CON +1, HP +2 — clean water' },
+  { id: 37, text: `You cross a hot zone — old chemical runoff baked into the roadbed, still off-gassing. Your skin itches for an hour afterward and your rad levels creep up.`, effect: () => modStat('rad', -1), notif: 'RAD -1 — chemical exposure' },
+  { id: 38, text: `A pre-Fall emergency road-kit is still bolted to a guardrail: sealed flares, a reflective blanket, a packet of glucose tabs. The tabs are still good.`, effect: () => modStat('hp', 3), notif: 'HP +3 — glucose tabs' },
+  { id: 39, text: `You take a detour through what was once an orchard. A handful of mutated fruit — bulbous, black-skinned — hangs in the dead trees. Hunger wins. They taste of iron and vinegar, but your body takes the calories.`, effect: () => { modStat('hp', 4); modStat('rad', -1); }, notif: 'HP +4, RAD -1 — mutant fruit' },
+  { id: 40, text: `You push hard to beat a weather front and arrive at your destination footsore and spent. The extra exertion costs you.`, effect: () => { modStat('con', -1); modStat('hp', -2); }, notif: 'CON -1, HP -2 — overexertion' },
+  { id: 41, text: `A wandering medic — no name offered, no questions asked — patches a wound you'd been ignoring. You feel better than you have in days.`, effect: () => modStat('hp', 6), notif: 'HP +6 — roadside medic' },
+  { id: 42, text: `You stumble into a nest of underground yellowjackets the size of your fist. Mutated, aggressive, and deeply unhappy. You run.`, effect: () => { modStat('hp', -5); modStat('dex', -1); }, notif: 'HP -5, DEX -1 — mutant yellowjackets' },
+  { id: 43, text: `A shallow pond, silty but relatively safe, lets you rest and soak your feet. You press on in noticeably better shape.`, effect: () => modStat('con', 1), notif: 'CON +1 — rest stop' },
+  { id: 44, text: `An old bunker entrance has been blown open — not recently. Inside you find military rations, three decades past their date, but sealed and still edible.`, effect: () => modStat('hp', 4), notif: 'HP +4 — bunker rations' },
+  { id: 45, text: `You breathe something wrong — a pocket of gas off a natural vent in the road surface. Your vision doubles for ten minutes and your mental sharpness suffers.`, effect: () => modStat('ms', -1), notif: 'MS -1 — gas inhalation' },
+
+  // ── STORY FLAGS (affect late-game) ──
+  { id: 46,
+    text: `Wedged in a crumbling highway overpass you find a sealed data-chip — Sigma Relay markings stamped on its casing, access log still legible. Someone carried this out of the facility and never delivered it. You pocket it.`,
+    loot: 'SIGMA DATA CHIP',
+    flag: 'enc_found_relay_chip',
+    notif: 'Found: SIGMA DATA CHIP' },
+  { id: 47,
+    text: `A dying prospector grabs your sleeve as you pass. She says: <em>"Arcadia isn't shelter — it's a sieve. They let you in so they can sort you. Don't go unarmed. Don't go alone."</em> She doesn't say anything after that.`,
+    flag: 'enc_arcadia_warning',
+    notif: 'Intel: Arcadia warning' },
+  { id: 48,
+    text: `A Dustwalker scout — off-duty, nervous, willing to talk for a full canteen — sketches the patrol rotations of Dustwalker Fort on a torn paper bag. You memorise the pattern before the ash takes the ink.`,
+    flag: 'enc_dustwalker_patrol_intel',
+    notif: 'Intel: Dustwalker patrol routes' },
+  { id: 49,
+    text: `You find a survivor huddled in a storm drain — emaciated, barely coherent, but wearing Vault 55 coveralls. Between bouts of coughing she tells you the service tunnel on the north face was left unbolted when the last crew evacuated. You won't forget that.`,
+    flag: 'enc_vault55_tunnel',
+    notif: 'Intel: Vault 55 service tunnel' },
+  { id: 50,
+    text: `A roving herbalist from Ashgrove presses a wrapped bundle into your hands: <em>"Warden-3 told us to give these to anyone heading further out. Medicine. For when the poison gets bad."</em> The bundle contains six doses of an anti-rad compound.`,
+    loot: 'ANTI-RAD COMPOUND x6',
+    flag: 'enc_warden_medicine',
+    effect: () => modStat('hp', 2),
+    notif: 'Found: ANTI-RAD COMPOUND x6 // HP +2' },
+];
+
+function triggerRandomEncounter() {
+  const enc = RANDOM_ENCOUNTERS[Math.floor(Math.random() * RANDOM_ENCOUNTERS.length)];
+  if (enc.effect) enc.effect();
+  if (enc.loot)   addItem(enc.loot);
+  if (enc.flag)   setFlag(enc.flag);
+  return enc;
 }
 
 // ════════════════════════════════════════════════════
