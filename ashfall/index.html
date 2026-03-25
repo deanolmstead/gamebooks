@@ -619,6 +619,7 @@ body::after {
     <div class="header-right">
       <span class="status-dot"></span>
       <button class="header-btn" id="btn-map" onclick="toggleMap()">[ MAP ]</button>
+      <button class="header-btn" id="btn-save" onclick="manualSave()">[ SAVE ]</button>
       <button class="header-btn" onclick="confirmReset()" style="color:var(--ash-faint)">[ RESET ]</button>
     </div>
   </div>
@@ -847,6 +848,19 @@ function loadState() {
   } catch(e) {}
   return false;
 }
+function manualSave() {
+  saveState();
+  const btn = document.getElementById('btn-save');
+  btn.textContent = '[ SAVED ✓ ]';
+  btn.style.borderColor = 'var(--olive)';
+  btn.style.color = 'var(--olive)';
+  setTimeout(() => {
+    btn.textContent = '[ SAVE ]';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+  }, 1200);
+}
+
 function confirmReset() {
   if (confirm('Erase save and restart?')) {
     localStorage.removeItem(SAVE_KEY);
