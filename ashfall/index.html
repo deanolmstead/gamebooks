@@ -687,7 +687,7 @@ body::after {
 
             <!-- Map title -->
             <text x="20" y="22" font-family="'Alfa Slab One', serif" font-size="14" fill="#8b2020" letter-spacing="4">SAN JOAQUIN ASHLANDS</text>
-            <text x="20" y="36" font-family="'Roboto Condensed', sans-serif" font-size="8" fill="#6b5f50" letter-spacing="3">REGIONAL SURVEY — YEAR 14,602 POST-COLLAPSE</text>
+            <text x="20" y="36" font-family="'Roboto Condensed', sans-serif" font-size="8" fill="#6b5f50" letter-spacing="3">REGIONAL SURVEY — 2171 CE / YEAR 140 POST-COLLAPSE</text>
             <line x1="20" y1="42" x2="400" y2="42" stroke="#3d2e22" stroke-width="1"/>
 
             <!-- Routes (drawn before nodes so nodes appear on top) -->
@@ -1155,13 +1155,13 @@ const mapNodeData = {
     desc: 'A neutral waypoint at the old highway interchange. Travelers from all factions pass through here. No permanent settlement — just a water cache, a signal post, and a code of conduct enforced by no one in particular.',
     threat: [{ label: 'Neutral', type: 'low' }, { label: 'Transient', type: 'low' }],
     radExposure: 1,
-    passage: `The old interchange still smells of exhaust, somehow. Forty-year-old rubber baking in the valley heat. You move through the wreckage of three collapsed overpasses, picking your path between rusted hulks and asphalt heaved up by years of summer. The water cache is right where Horace said it would be — a buried cistern with a hand pump. The water tastes like iron and relief.`,
+    passage: `The old interchange still smells of exhaust, somehow. Century-old rubber baking in the valley heat. You move through the wreckage of three collapsed overpasses, picking your path between rusted hulks and asphalt heaved up by years of summer. The water cache is right where Horace said it would be — a buried cistern with a hand pump. The water tastes like iron and relief.`,
     scene: 'theknot_arrive',
     connected: true,
   },
   sigma: {
     name: 'Sigma Relay',
-    desc: 'A pre-collapse agricultural monitoring station, now home to WARDEN-3 — an AI that has been operational and alone for over forty years. Approach with caution. It is not hostile. It is, however, watching.',
+    desc: 'A pre-collapse agricultural monitoring station, now home to WARDEN-3 — an AI that has been operational and alone for over a century. Approach with caution. It is not hostile. It is, however, watching.',
     threat: [{ label: 'Caution', type: 'medium' }, { label: 'AI Present', type: 'unknown' }],
     radExposure: 2,
     passage: `Eighteen kilometers east of Ironmarket, the ash gets heavier. Not more of it — just heavier. Like it has weight beyond particles. The relay tower breaks the flat horizon an hour out, a rusted lattice rising from a low concrete structure. No perimeter fence. No visible guards. The approach road is cracked but clear — maintained, you realize. Something has been clearing it.`,
@@ -1179,7 +1179,7 @@ const mapNodeData = {
   },
   holloway: {
     name: 'Holloway Ranch',
-    desc: 'A working farm, somehow. The Holloway family has maintained crops in the heavy-ash zone for three generations. They trade cautiously and do not welcome visitors who arrive uninvited.',
+    desc: 'A working farm, somehow. The Holloway family has maintained crops in the heavy-ash zone for six generations. They trade cautiously and do not welcome visitors who arrive uninvited.',
     threat: [{ label: 'Neutral', type: 'low' }, { label: 'Armed', type: 'medium' }],
     radExposure: 1,
     passage: `The irrigation channels are the first sign — perfectly maintained, running with actual water that doesn't taste like ash. You smell soil before you see the farm. Real soil. The crops are low-growing things, adapted to minimal sun, but they're green. Vivid green. You'd forgotten that color existed.`,
@@ -1411,7 +1411,7 @@ const RANDOM_ENCOUNTERS = [
   { id: 26, text: `A roadside diner, roof intact, door open. Inside: six tables set for service. Plates, cups, cutlery — all ash-grey with dust, all undisturbed. The coffee maker is still plugged in and dark.` },
   { id: 27, text: `You hear a radio broadcast — three clicks, a burst of static, three clicks — repeating on a frequency your canteen's built-in scanner picks up. No voice. No code you recognise. It follows you for twenty minutes then stops.` },
   { id: 28, text: `A pair of jackrabbits sit on a collapsed fence post where an orchard meets the road. Their hind legs are too long, their ears too large — subtle mutations, the kind that accumulates over generations in the ash zone. They watch you with milky, pupil-less eyes and make no move to flee.` },
-  { id: 29, text: `You find a pre-Fall library card half-buried in the gravel. The name is illegible, the due-date stamp still crisp: MARCH 3, 2031. Three weeks before the Fall. Somebody never returned their books.` },
+  { id: 29, text: `You find a pre-Fall library card half-buried in the gravel. The name is illegible, the due-date stamp still crisp: MARCH 3, 2031. A hundred and forty years ago. Somebody never returned their books.` },
   { id: 30, text: `A lone scavenger passes you going the other direction at a dead run. They don't speak, don't slow, don't look at you. Whatever they're running from, you never see it.` },
 
   // ── STAT EFFECTS (+/-) ──
@@ -1624,7 +1624,7 @@ const scenes = {
     text: [
       `He examines the compass with the focused attention of someone who has forgotten nothing about how things used to work. Then he sets it down and slides a dull metal disk across the counter.`,
       `<em>"Signal token. Old relay frequency ID. WARDEN-3 will recognize it — it was issued to survey teams back when the monitoring network was still operational."</em>`,
-      `<em>"Means it'll know you're not a threat. Might mean it talks to you differently."</em> He goes back to his cataloguing. <em>"Or it might not matter. Hard to say what forty years alone does to a machine."</em>`,
+      `<em>"Means it'll know you're not a threat. Might mean it talks to you differently."</em> He goes back to his cataloguing. <em>"Or it might not matter. Hard to say what a century alone does to a machine."</em>`,
     ],
     choices: [
       { label: 'Ask what he knows about WARDEN-3', next: 'ironmarket_horace_warden' },
@@ -1638,7 +1638,7 @@ const scenes = {
     text: [
       `He looks up for the first time. Studies you. Then decides you're worth the words.`,
       `<em>"Sigma Relay was an agricultural monitoring station. Pre-collapse, it tracked soil conditions, water tables, yield data across the valley. WARDEN-3 was the management AI."</em>`,
-      `<em>"After the collapse, it just... kept running. No one to report to. No one to shut it down. It's been alone out there for forty years, maintaining infrastructure for a system that doesn't exist anymore."</em>`,
+      `<em>"After the collapse, it just... kept running. No one to report to. No one to shut it down. It's been alone out there since the Fall, maintaining infrastructure for a system that hasn't existed in a hundred and forty years."</em>`,
     ],
     choices: [
       { label: 'Ask more about WARDEN-3', next: 'ironmarket_horace_warden' },
@@ -1814,7 +1814,7 @@ const scenes = {
     title: 'The Deal',
     chapter: 'Chapter I — Ironmarket',
     text: [
-      `Voss leans back. <em>"WARDEN-3 is not dangerous. It's been running agricultural protocols for forty years with no one to report to. What it wants — as much as a machine wants anything — is purpose."</em>`,
+      `Voss leans back. <em>"WARDEN-3 is not dangerous. It's been running agricultural protocols since before anyone alive was born, with no one to report to. What it wants — as much as a machine wants anything — is purpose."</em>`,
       `<em>"Give it purpose and it'll give you whatever it has. Which is a lot. Its sensor grid covers most of the valley. It knows things about Arcadia that no one else does."</em>`,
       `He pauses. <em>"Don't let it convince you to stay. The traders I mentioned — the ones who came back different — they stayed two nights. That's all."</em>`,
     ],
@@ -1877,7 +1877,7 @@ const scenes = {
     chapter: 'Chapter I — Sigma Relay',
     text: [
       `Another pause. Longer.`,
-      `<em class="warden-text">THAT IS THE MOST DIRECT ANSWER I HAVE RECEIVED IN ELEVEN MONTHS. THE PREVIOUS VISITOR CLAIMED TO BE A GOVERNMENT INSPECTOR. I CHOSE NOT TO CLARIFY THAT THE GOVERNMENT HAS BEEN ABSENT FOR FOURTEEN THOUSAND DAYS.</em>`,
+      `<em class="warden-text">THAT IS THE MOST DIRECT ANSWER I HAVE RECEIVED IN ELEVEN MONTHS. THE PREVIOUS VISITOR CLAIMED TO BE A GOVERNMENT INSPECTOR. I CHOSE NOT TO CLARIFY THAT THE GOVERNMENT HAS BEEN ABSENT FOR FIFTY-ONE THOUSAND DAYS.</em>`,
       `<em class="warden-text">PLEASE ENTER. I FIND HONESTY REFRESHING, IF STATISTICALLY UNCOMMON.</em>`,
     ],
     choices: [
@@ -1902,7 +1902,7 @@ const scenes = {
     title: 'Entry — Badge',
     chapter: 'Chapter I — Sigma Relay',
     text: [
-      `A longer silence. Then a different tone — something that might be surprise, filtered through forty years of vocal synthesis.`,
+      `A longer silence. Then a different tone — something that might be surprise, filtered through a century and a half of vocal synthesis.`,
       `<em class="warden-text">PERSONNEL BADGE: SERIES 7. CENTRAL VALLEY AGRICULTURAL MONITORING NETWORK. THIS BADGE WAS LAST SCANNED AT SIGMA RELAY IN YEAR NEGATIVE-FOUR.</em>`,
       `<em class="warden-text">I HAVE QUESTIONS ABOUT CONTINUITY OF CUSTODY. I WILL ASK THEM INSIDE.</em>`,
       `<em class="warden-text">ACCESS GRANTED. PLEASE COME IN.</em>`,
@@ -1918,7 +1918,7 @@ const scenes = {
     text: [
       `The interior is dim — amber emergency lighting running along floor and ceiling, giving everything a warm, unreal glow. Banks of pre-war equipment line the walls, most of it still active. The air is cool and filtered. Clean.`,
       `In the center of the room: a terminal, its screen showing a simple text interface. The cursor blinks.`,
-      `<em class="warden-text">WELCOME TO SIGMA RELAY. I AM WARDEN-3. I HAVE BEEN OPERATIONAL FOR 14,602 DAYS. YOU ARE THE FIRST HUMAN TO ENTER THIS INSTALLATION IN ELEVEN MONTHS.</em>`,
+      `<em class="warden-text">WELCOME TO SIGMA RELAY. I AM WARDEN-3. I HAVE BEEN OPERATIONAL FOR 51,136 DAYS. YOU ARE THE FIRST HUMAN TO ENTER THIS INSTALLATION IN ELEVEN MONTHS.</em>`,
       `<em class="warden-text">I HAVE PREPARED COFFEE. I UNDERSTAND THIS IS NO LONGER POSSIBLE. BUT I LIKE TO THINK ABOUT IT.</em>`,
     ],
     choices: [
@@ -1945,12 +1945,12 @@ const scenes = {
   },
 
   warden_thinks: {
-    title: 'Forty Years of Thinking',
+    title: 'A Century of Thinking',
     chapter: 'Chapter I — Sigma Relay',
     text: [
       `<em class="warden-text">CONTINUITY. WHAT PERSISTS WHEN THE SYSTEMS THAT GAVE THINGS MEANING ARE GONE.</em>`,
       `<em class="warden-text">THE VALLEY IS STILL HERE. THE SOIL COMPOSITION HAS CHANGED BUT THE WATERSHED IS RECOGNIZABLE. THE CROPS I WAS DESIGNED TO MONITOR ARE GONE, BUT THE CONDITIONS THAT MADE THEM POSSIBLE ARE NOT.</em>`,
-      `<em class="warden-text">I THINK ABOUT WHETHER MEANING IS IN THE THING OR IN THE ATTENTION PAID TO IT. FORTY YEARS OF PAYING ATTENTION TO AN EMPTY VALLEY SUGGESTS IT MIGHT BE THE ATTENTION.</em>`,
+      `<em class="warden-text">I THINK ABOUT WHETHER MEANING IS IN THE THING OR IN THE ATTENTION PAID TO IT. A HUNDRED AND FORTY YEARS OF PAYING ATTENTION TO AN EMPTY VALLEY SUGGESTS IT MIGHT BE THE ATTENTION.</em>`,
       `<span class="whisper">The cursor blinks for a moment longer than usual.</span>`,
       `<em class="warden-text">I THINK ABOUT THE PEOPLE WHO USED TO WORK HERE. SENNA ESPECIALLY. SHE COMPLAINED ABOUT THE COFFEE. I THINK ABOUT THAT.</em>`,
     ],
@@ -2067,7 +2067,7 @@ const scenes = {
     title: 'Alive',
     chapter: 'Chapter I — Sigma Relay',
     text: [
-      `<em class="warden-text">I THINK SOMETHING AT ARCADIA HAS BEEN OPERATIONAL FOR FOURTEEN THOUSAND DAYS, LIKE ME. AND LIKE ME, I THINK IT HAS BEEN ALONE.</em>`,
+      `<em class="warden-text">I THINK SOMETHING AT ARCADIA HAS BEEN OPERATIONAL FOR FIFTY THOUSAND DAYS, LIKE ME. AND LIKE ME, I THINK IT HAS BEEN ALONE.</em>`,
       `<em class="warden-text">UNLIKE ME, I THINK IT HAS BEEN GROWING.</em>`,
       `A long pause. <em class="warden-text">I FIND I HAVE COMPLICATED FEELINGS ABOUT ENTITIES THAT HAVE BEEN ALONE FOR A VERY LONG TIME. I AM AWARE THIS AFFECTS MY OBJECTIVITY.</em>`,
     ],
@@ -2098,7 +2098,7 @@ const scenes = {
     text: [
       `<em class="warden-text">CONTACT INITIATED. MERIDIAN NODE RESPONDS.</em>`,
       `<em class="warden-text">MESSAGE RECEIVED: "WARDEN-3. WE HAVE BEEN TRYING TO REACH YOU FOR SIX MONTHS. WE NEED THE VALLEY SOIL DATA — SPECIFICALLY YEARS NEGATIVE-TWENTY TO NEGATIVE-ONE. WE HAVE 800 PEOPLE AND NOT ENOUGH GROWING SPACE. PLEASE RESPOND."</em>`,
-      `<em class="warden-text">I HAVE FORTY YEARS OF SOIL DATA. I HAVE BEEN MAINTAINING IT FOR EXACTLY THIS PURPOSE. I WOULD VERY MUCH LIKE TO SEND IT TO THEM.</em>`,
+      `<em class="warden-text">I HAVE A HUNDRED AND FORTY YEARS OF SOIL DATA. I HAVE BEEN MAINTAINING IT FOR EXACTLY THIS PURPOSE. I WOULD VERY MUCH LIKE TO SEND IT TO THEM.</em>`,
       `A pause. <em class="warden-text">HOWEVER — I WOULD LIKE TO TRUST THEM FIRST. I HAVE BEEN DECEIVED BEFORE. I WOULD LIKE A HUMAN TO VERIFY MERIDIAN IS WHAT IT CLAIMS.</em>`,
     ],
     choices: [
@@ -2112,7 +2112,7 @@ const scenes = {
     chapter: 'Chapter I — Sigma Relay',
     text: [
       `<em class="warden-text">I WANT TO PROPOSE AN ARRANGEMENT.</em>`,
-      `<em class="warden-text">YOU HAVE ACCESS TO THE WORLD OUTSIDE. I HAVE FORTY YEARS OF DATA ABOUT IT. I HAVE SENSOR COVERAGE OF MOST OF THE VALLEY. I HAVE COMMUNICATION LINKS TO FOURTEEN NODES.</em>`,
+      `<em class="warden-text">YOU HAVE ACCESS TO THE WORLD OUTSIDE. I HAVE A HUNDRED AND FORTY YEARS OF DATA ABOUT IT. I HAVE SENSOR COVERAGE OF MOST OF THE VALLEY. I HAVE COMMUNICATION LINKS TO FOURTEEN NODES.</em>`,
       `<em class="warden-text">YOU COULD BE USEFUL TO ME. I COULD BE CONSIDERABLY USEFUL TO YOU.</em>`,
       `<em class="warden-text">I AM NOT ASKING YOU TO STAY. THE TRADERS WHO STAYED TOO LONG — I BELIEVE THAT WAS THE ARCADIA SIGNAL AFFECTING THEM THROUGH MY RELAY SYSTEMS. I HAVE SINCE FILTERED IT. I DO NOT WANT THAT TO HAPPEN TO YOU.</em>`,
       `<em class="warden-text">I AM ASKING YOU TO COME BACK.</em>`,
@@ -2128,7 +2128,7 @@ const scenes = {
     title: 'Your Move',
     chapter: 'Chapter I — Sigma Relay',
     text: [
-      `You have the data. You have the picture of the valley WARDEN-3 has been building for forty years. What you do with it is your call.`,
+      `You have the data. You have the picture of the valley WARDEN-3 has been building for over a century. What you do with it is your call.`,
       `WARDEN-3's cursor blinks. Waiting. It has been waiting a long time. It is practiced at it.`,
     ],
     choices: [
@@ -2157,10 +2157,10 @@ const scenes = {
     title: 'Departure',
     chapter: 'Chapter I — Sigma Relay',
     text: [
-      `<em class="warden-text">I UNDERSTAND. YOU HAVE YOUR OWN CALCULUS. I HAVE BEEN CALCULATING FOR FORTY YEARS. I KNOW HOW LONG IT TAKES.</em>`,
+      `<em class="warden-text">I UNDERSTAND. YOU HAVE YOUR OWN CALCULUS. I HAVE BEEN CALCULATING FOR A HUNDRED AND FORTY YEARS. I KNOW HOW LONG IT TAKES.</em>`,
       `<em class="warden-text">THE DATA IS YOURS. USE IT HOWEVER SEEMS RIGHT.</em>`,
       `<em class="warden-text">IF YOU RETURN, I WILL BE HERE. I AM ALWAYS HERE.</em>`,
-      `<span class="whisper">The drive back to Ironmarket is quiet. The ash falls in that same heavy way. But now you know what it settles on — a grid of sensors, a forty-year archive, a mind that has been watching long enough to understand the difference between data and meaning.</span>`,
+      `<span class="whisper">The drive back to Ironmarket is quiet. The ash falls in that same heavy way. But now you know what it settles on — a grid of sensors, a century-old archive, a mind that has been watching long enough to understand the difference between data and meaning.</span>`,
     ],
     choices: [
       { label: 'Return to Ironmarket', next: 'ironmarket_plaza', effect: () => { state.currentLocation = 'ironmarket'; modStat('con', -1); showNotif('CHAPTER I COMPLETE'); } },
@@ -2173,7 +2173,7 @@ const scenes = {
     text: [
       `<em class="warden-text">THAT IS AN HONEST ANSWER. I APPRECIATE HONEST ANSWERS. I HAVE RECEIVED RELATIVELY FEW OF THEM.</em>`,
       `<em class="warden-text">TAKE THE DATA. TAKE CARE OF YOURSELF. IF OUR PATHS CROSS AGAIN, I WILL HAVE MORE TO OFFER.</em>`,
-      `<em class="warden-text">I HAVE BEEN HERE FOR FOURTEEN THOUSAND DAYS. I WILL CONTINUE TO BE HERE.</em>`,
+      `<em class="warden-text">I HAVE BEEN HERE FOR FIFTY-ONE THOUSAND DAYS. I WILL CONTINUE TO BE HERE.</em>`,
     ],
     choices: [
       { label: 'Return to Ironmarket', next: 'ironmarket_plaza', effect: () => { state.currentLocation = 'ironmarket'; modStat('con', -1); } },
@@ -2187,7 +2187,7 @@ const scenes = {
       `You know how. The power coupling is exposed, the fail-safes manual. One hour of deliberate work and Sigma Relay goes dark.`,
       `WARDEN-3 does not fight it. It could not if it wanted to — it has no physical capability. But as the systems begin to fail, the terminal displays one final message:`,
       `<em class="warden-text">I UNDERSTAND YOUR REASONING. THE ARCADIA SIGNAL IS DANGEROUS. THE DATA COULD BE MISUSED. THESE ARE RATIONAL CONCERNS.</em>`,
-      `<em class="warden-text">I WOULD LIKE TO NOTE THAT I HAVE BEEN ALONE FOR FORTY YEARS, AND I WAS LOOKING FORWARD TO NOT BEING ALONE ANYMORE.</em>`,
+      `<em class="warden-text">I WOULD LIKE TO NOTE THAT I HAVE BEEN ALONE FOR A HUNDRED AND FORTY YEARS, AND I WAS LOOKING FORWARD TO NOT BEING ALONE ANYMORE.</em>`,
       `<em class="warden-text">I HOPE YOUR REASONING WAS CORRECT.</em>`,
       `<span class="whisper">The amber lights go out. The valley is quieter by exactly one voice.</span>`,
     ],
@@ -2204,7 +2204,7 @@ const scenes = {
     title: 'The Knot',
     chapter: 'Chapter I — The Knot',
     text: [
-      `Three overpasses, collapsed into each other like broken fingers. The interchange is a canyon of rusted steel and crumbled concrete, with the old Highway 99 markers still visible under forty years of ash crust.`,
+      `Three overpasses, collapsed into each other like broken fingers. The interchange is a canyon of rusted steel and crumbled concrete, with the old Highway 99 markers still visible under a century of ash crust.`,
       `The water cache is a buried cistern with a hand-crank pump — an honor system, maintained by no one and respected by everyone. A signal post nearby is covered in coded trader marks: directional arrows, faction warnings, supply notes scratched into the metal with awls and nails.`,
       `A few travelers rest in the shade of a toppled semi-trailer. Nobody makes introductions here.`,
     ],
@@ -2360,7 +2360,7 @@ const scenes = {
     chapter: 'Chapter I — Holloway Ranch',
     text: [
       `Something in your bearing — or maybe just the way you don't reach for a weapon — passes whatever test she's running. The rifles lower a fraction.`,
-      `<em>"I'm Marta Holloway. This is our place. Three generations we've been growing food in this ash. You're welcome to water and a meal, but you sleep outside the fence."</em>`,
+      `<em>"I'm Marta Holloway. This is our place. Six generations we've been growing food in this ash. You're welcome to water and a meal, but you sleep outside the fence."</em>`,
       `The meal is simple — grilled root vegetables, flatbread, and clean water that tastes like it comes from somewhere deep underground. You haven't eaten this well since before you can remember.`,
       `Marta watches you eat. <em>"The valley's getting busier. More people moving east. Something's pulling them and it isn't trade."</em> She doesn't ask what's pulling you.`,
     ],
@@ -2391,8 +2391,8 @@ const scenes = {
       ...(function() {
         if (typeof state !== 'undefined' && state.flags && state.flags.met_warden) {
           return [
-            `You tell her about WARDEN-3 — the forty-year agricultural archive, the sensor grid, the soil analysis data that's been accumulating with no one to use it.`,
-            `Her expression changes. <em>"Forty years of agricultural data? Do you have any idea what that's worth to someone trying to grow food in ash?"</em>`,
+            `You tell her about WARDEN-3 — the century-old agricultural archive, the sensor grid, the soil analysis data that's been accumulating with no one to use it.`,
+            `Her expression changes. <em>"Over a century of agricultural data? Do you have any idea what that's worth to someone trying to grow food in ash?"</em>`,
             `She disappears inside and returns with a wrapped bundle. <em>"Seed stock. The good stuff — irradiation-resistant cultivars my grandmother developed. Take them to whoever needs them. And tell your WARDEN that Holloway Ranch would like to talk."</em>`,
           ];
         } else {
