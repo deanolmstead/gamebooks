@@ -12,24 +12,24 @@
    sickly olive, deep charcoal
 ═══════════════════════════════════════════ */
 :root {
-  --ash:        #e8dcc8;
-  --ash-dim:    #b8a890;
-  --ash-faint:  #6b5f50;
+  --ash:        #ede3d1;
+  --ash-dim:    #c4b69e;
+  --ash-faint:  #8a7d6d;
   --blood:      #c0392b;
   --blood-dim:  #8b2020;
   --blood-glow: rgba(192,57,43,0.15);
-  --sienna:     #a0522d;
-  --sienna-dim: #6b3318;
-  --olive:      #6b7c3a;
-  --olive-dim:  #4a5728;
-  --ink:        #221c15;
-  --ink-mid:    #2b231b;
-  --ink-panel:  #332921;
-  --ink-border: #4a3a2c;
+  --sienna:     #b86633;
+  --sienna-dim: #7a4020;
+  --olive:      #7d8e45;
+  --olive-dim:  #5a6830;
+  --ink:        #2a2318;
+  --ink-mid:    #342b20;
+  --ink-panel:  #3d3228;
+  --ink-border: #584838;
   --amber:      #d4a017;
   --amber-dim:  #8b6800;
-  --paper:      #f0e6d0;
-  --paper-dark: #c8b898;
+  --paper:      #f2ead5;
+  --paper-dark: #d0c4a8;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,7 +55,7 @@ body::before {
 body::after {
   content: '';
   position: fixed; inset: 0;
-  background: radial-gradient(ellipse at center, transparent 50%, rgba(10,8,6,0.7) 100%);
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(10,8,6,0.55) 100%);
   pointer-events: none; z-index: 9998;
 }
 
@@ -394,7 +394,7 @@ body::after {
 .choice-btn.danger::before { background: rgba(192,57,43,0.12); }
 
 .choice-btn.locked {
-  opacity: 0.5; cursor: not-allowed;
+  opacity: 0.6; cursor: not-allowed;
   pointer-events: none;
 }
 
@@ -412,8 +412,8 @@ body::after {
 
 .choice-req {
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 9px; letter-spacing: 2px;
-  color: var(--sienna); text-transform: uppercase;
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--amber); text-transform: uppercase;
   margin-top: 4px; display: block;
 }
 
@@ -606,7 +606,7 @@ body::after {
   <div class="title-rule-thin"></div>
   <button class="title-btn" onclick="startGame(false)">[ BEGIN ]</button>
   <button class="title-btn title-btn-sec" onclick="startGame(true)">[ Continue Save ]</button>
-  <div class="title-version">Build 5.3 — Ironmarket · Sigma Relay · The Knot · Ashgrove · Holloway Ranch</div>
+  <div class="title-version">Build 5.4 — Ironmarket · Sigma Relay · The Knot · Ashgrove · Holloway Ranch</div>
 </div>
 
 <!-- ═══════════════════════════════════════════ GAME SHELL -->
@@ -1668,7 +1668,7 @@ const scenes = {
     text: [
       `Healer's Row is three stalls run by one woman. She's efficient enough to work all three simultaneously, moving between patients with calm hands and a face that has stopped being surprised by anything.`,
       `<em>"Sit. Let me look at you."</em> She doesn't ask permission.`,
-      `<em>"Mild radiation exposure. Early dehydration. You've been in the ash longer than recommended. I can give you a Rad flush and a litre of filtered water — two Rad Tabs, or three caps."</em>`,
+      `<em>"Mild radiation exposure. Early dehydration. You've been in the ash longer than recommended. I can give you a Rad flush and a litre of filtered water — two Rad Tabs, or three trade chits."</em>`,
     ],
     choices: [
       {
@@ -1744,7 +1744,7 @@ const scenes = {
     text: [
       `Something shifts in her expression — not surprise. Recognition.`,
       `<em>"Voss."</em> She repeats it like she's tasting it. <em>"Yeah. I'll take you."</em>`,
-      `She leads you through the stalls without looking back. <em>"Word of advice: don't let him know what you really want before you know what he wants. He collects leverage the way other people collect caps."</em>`,
+      `She leads you through the stalls without looking back. <em>"Word of advice: don't let him know what you really want before you know what he wants. He collects leverage the way other people collect rain water."</em>`,
     ],
     choices: [
       { label: 'Follow her to Voss', next: 'ironmarket_voss_stall' },
