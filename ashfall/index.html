@@ -606,7 +606,7 @@ body::after {
   <div class="title-rule-thin"></div>
   <button class="title-btn" onclick="startGame(false)">[ BEGIN ]</button>
   <button class="title-btn title-btn-sec" onclick="startGame(true)">[ Continue Save ]</button>
-  <div class="title-version">Build 5.1 — Ironmarket · Sigma Relay · The Knot · Ashgrove · Holloway Ranch</div>
+  <div class="title-version">Build 5.2 — Ironmarket · Sigma Relay · The Knot · Ashgrove · Holloway Ranch</div>
 </div>
 
 <!-- ═══════════════════════════════════════════ GAME SHELL -->
@@ -1482,10 +1482,11 @@ const scenes = {
       `The ashfall is light today — just a grey dusting that settles on your shoulders and turns the air to chalk. Ironmarket's outer wall rises ahead of you: salvaged corrugated steel, rebar, and old highway signage welded into something that passes for fortification.`,
       `A guard tower looms above the main gate. A woman with a scoped rifle watches you with mild disinterest. A faded hand-painted sign reads: <em>IRONMARKET — TRADE FAIR, NOT FREE.</em>`,
       `The smell hits you before you're through: smoke, rendered fat, something fermented. The sounds of commerce. Of people still alive, still arguing about price.`,
+      `Two traders pushing a handcart pass you on their way out. One mutters to the other: <em>"—still hasn't come back. Kael won't say it, but that's three weeks now. Scout goes east alone, doesn't return. Same story every time—"</em> They move on before you can hear more.`,
     ],
     choices: [
-      { label: 'Approach the gate guard', next: 'ironmarket_kael' },
-      { label: 'Slip past without engaging', next: 'ironmarket_plaza', effect: () => modStat('con', -1) },
+      { label: 'Approach the gate guard', next: 'ironmarket_kael', effect: () => setFlag('heard_eastern_warning') },
+      { label: 'Slip past without engaging', next: 'ironmarket_plaza', effect: () => { modStat('con', -1); setFlag('heard_eastern_warning'); } },
     ],
   },
 
